@@ -1,0 +1,32 @@
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<body>
+   <h:form>
+       <p:dataTable var="todo" value="#{toDoDTO.toDo}">
+           <p:column headerText="Task">
+               <p:inputText value="#{todo.name}"/>
+           </p:column>
+
+           <p:column headerText="p:tag-Date">
+               <p:calendar value="#{todo.date}"
+                           id="p-date" pattern="d/M/yyyy" mode="popup" required="true">
+               </p:calendar>
+           </p:column>
+
+           <p:column headerText="Priorität">
+               <p:inputText value="#{todo.priority}"/>
+           </p:column>
+       </p:dataTable>
+
+       <p:commandButton value="Save" ajax="false"/>
+       <!--TODO add Action-->
+       <p:commandButton value="Cancel" immediate="true"/>
+       <p:messages/>
+   </h:form>
+</body>
+</html>

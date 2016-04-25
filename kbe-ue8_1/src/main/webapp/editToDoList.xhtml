@@ -1,0 +1,65 @@
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <h:outputStylesheet library="css" name="todo.css"/>
+    <title>ToDo-Liste</title>
+</h:head>
+
+<body>
+
+<h1>Faceletts</h1>
+<h:form>
+
+    <p:outputPanel>
+        <h:outputText value="Es sind derzeit #{toDoListMB.checkedtodos} von #{toDoListMB.todosCount} erledigt."/>
+    </p:outputPanel>
+    <p:dataTable var="todo" value="#{toDoListMB.toDoList.toDos}">
+        <p:column headerText="Task">
+            <h:outputText value="#{todo.name}"/>
+        </p:column>
+
+        <p:column headerText="Done">
+            <p:selectBooleanCheckbox value="#{todo.done}"/>
+        </p:column>
+
+        <p:column headerText="p:tag-Date">
+            <p:calendar value="#{todo.date}"
+                        id="p-date" pattern="d/M/yyyy"  mode="popup" required="true">
+            </p:calendar>
+        </p:column>
+        <!--<p:column headerText="h:tag-CustomDateConverter">-->
+            <!--<h:inputText id="h-date" value="#{todo.date}" rendered="true" label="CustomDateConverter h-tag" required="true">-->
+                <!--<f:convertDateTime pattern="d/M/yyyy"/>-->
+                <!--<f:validateRequired/>-->
+            <!--</h:inputText>-->
+        <!--</p:column>-->
+        <p:column headerText="Priorität">
+           <p:inputText value="#{todo.priority}"/>
+
+        </p:column>
+    </p:dataTable>
+    <p:messages/>
+    <p:commandButton immediate="true" value="Cancel" ajax="false"/>
+    <p:commandButton value="save" ajax="false" action="#{toDoListMB.save}"/>
+</h:form>
+
+<p:link outcome="showTime" value="Show Time">
+    <f:param name="showTime"/>
+</p:link>
+<h:form>
+    <p:commandLink id="link-to-time" action="#{toDoListMB.time}" ajax="false">
+        <h:outputText value="Show Time Command"/>
+    </p:commandLink>
+    <br/>
+    <p:commandLink ajax="false" id="link-to-interval" action="#{toDoListMB.interval}">
+        <h:outputText value="Link-to-MaxInterval"/>
+    </p:commandLink>
+</h:form>
+</body>
+</html>

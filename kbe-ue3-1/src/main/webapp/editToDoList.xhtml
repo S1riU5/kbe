@@ -1,0 +1,35 @@
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <h:outputStylesheet library="css" name="todo.css"/>
+    <title>ToDo-Liste</title>
+</h:head>
+
+<body>
+
+<h1>Faceletts</h1>
+<h:form>
+
+    <p:outputPanel>
+        Es sind derzeit #{toDoListMB.checkedtodos} von #{toDoListMB.todosCount} erledigt.
+    </p:outputPanel>
+    <p:dataTable var="todo" value="#{toDoListMB.toDoList.toDos}">
+        <p:column headerText="Task">
+            <h:outputText value="#{todo.name}"/>
+        </p:column>
+
+        <p:column headerText="Done">
+            <p:selectBooleanCheckbox value="#{todo.done}"/>
+        </p:column>
+    </p:dataTable>
+
+    <p:commandButton value="save"  ajax="false" action="toDoListMB.save"/>
+</h:form>
+</body>
+</html>
